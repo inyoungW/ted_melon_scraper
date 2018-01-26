@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ted</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><B>title</B></td>
+            <td><B>talker_name</B></td>
+            <td><B>video_url</B></td>
+            <td><B>videw_image</B></td>
+        </tr>
+        </thead>
+        <tbody>
+      		{% for talk in talks %}
+      		<tr>
+      			<td>{{ talk.title }}</td>
+      			<td>{{ talk.talker_name }}</td>
+      			<td>{{ talk.video_url  }}</td>
+      			<td> <img src="{{ talk.video_image}} " crop ="top" /></td>
+      		</tr>
+      		{% endfor %}
+        <tbody>
+    </table>
+</body>
