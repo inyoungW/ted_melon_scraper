@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>ted</title>
+  <title>Ted New Video</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -15,19 +15,43 @@
         <tr>
             <td><B>title</B></td>
             <td><B>talker_name</B></td>
-            <td><B>video_url</B></td>
-            <td><B>videw_image</B></td>
+            <td><B>video_image</B></td>
+            <td><B>video_date</B></td>
         </tr>
         </thead>
         <tbody>
       		{% for talk in talks %}
       		<tr>
-      			<td>{{ talk.title }}</td>
+      			<td><a href="http://www.ted.com{{ talk.video_url  }}">{{ talk.title }}</a></td>
       			<td>{{ talk.talker_name }}</td>
-      			<td>{{ talk.video_url  }}</td>
+      			<td>{{ talk.video_date  }}</td>
       			<td> <img src="{{ talk.video_image}} " crop ="top" /></td>
       		</tr>
       		{% endfor %}
         <tbody>
     </table>
+    	{% if talks.has_other_pages %}
+    		<ul class = "pagination">
+    			{% if talks.has_previous %}
+    			<li><a href="?page={{ talks.previous_page_number }}">&laquo;</a></li>
+    			{% else %}
+    			<li class ="disabled"><span>&laquo;</span></li>
+    			{% endif %}
+
+    			{% for i in talks.paginator.page_range %}
+
+    				{% if talks.number == i %}
+    				<li class="active"><span>{{ i }}<span class ="sr-only">(current)</span></span></li>
+    				{% else %}
+    				<li><a href="?page={{ i }}">{{ i }}</a></li>
+    				{% endif %}
+    			{% endfor %}
+
+    			{% if talks.has_next %}
+    				<li><a href="?page={{ talks.next_page_number }}">&raquo;</a></li>
+    			{% else %}
+    				<li class = "disabled"><span>&raquo;</span></li>
+    			{% endif %}
+    		</ul>
+    		{% endif %}
 </body>
